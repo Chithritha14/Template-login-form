@@ -1,0 +1,137 @@
+﻿<!-- main app container -->
+<div class="card m-3">
+ 
+    <h5 class="card-header text-center">Template-Driven Form Validation</h5>
+    <div class="card-body">
+        <!-- <link rel="stylesheet" href="app.component.css"> -->
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" [mustMatch]="['password', 'confirmPassword']" novalidate>
+          
+                <div class="col-5 mb-3">
+                    <label class="form-label">First Name</label>
+                    <input type="text" name="firstName" ngModel #firstName="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }" required>
+                    <div *ngIf="f.submitted && firstName.errors" class="invalid-feedback">
+                        <div *ngIf="firstName.errors.required">First Name is required</div>
+                    </div>
+                </div>
+                <div class="col-5 mb-3">
+                    <label class="form-label">Last Name</label>
+                    <input type="text" name="lastName" ngModel #lastName="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }" required>
+                    <div *ngIf="f.submitted && lastName.errors" class="invalid-feedback">
+                        <div *ngIf="lastName.errors.required">Last Name is required</div>
+                    </div>
+                </div>
+
+        
+                <div class="col-5 mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="text" name="email" ngModel #email="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email>
+                    <div *ngIf="f.submitted && email.errors" class="invalid-feedback">
+                        <div *ngIf="email.errors.required">Email is required</div>
+                        <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                    </div>
+                </div>
+
+            <div class="row">
+                <div class="col-5 mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" ngModel #password="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6">
+                    <div *ngIf="f.submitted && password.errors" class="invalid-feedback">
+                        <div *ngIf="password.errors.required">Password is required</div>
+                        <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+                    </div>
+                </div>
+                <div class="col-5 mb-3">
+                    <label class="form-label">Confirm Password</label>
+                    <input type="password" name="confirmPassword" ngModel #confirmPassword="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && confirmPassword.invalid }" required>
+                    <div *ngIf="f.submitted && confirmPassword.errors" class="invalid-feedback">
+                        <div *ngIf="confirmPassword.errors.required">Confirm Password is required</div>
+                        <div *ngIf="confirmPassword.errors.mustMatch">Passwords must match</div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary me-1">Register</button>
+                <button class="btn btn-secondary" type="reset">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+<style>
+/* Styling for the main card container */
+.card {
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: palevioletred;
+    font-family:Verdana, Geneva, Tahoma, sans-serif ;
+}
+
+/* Styling for the card header */
+.card-header {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    padding: 10px 0;
+    border-radius: 8px 8px 0 0;
+}
+
+/* Styling for the card body */
+.card-body {
+    padding: 20px 0;
+}
+
+/* Styling for form labels */
+.form-label {
+    font-weight: bold;
+}
+
+/* Styling for form inputs */
+.form-control {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Styling for invalid inputs */
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+/* Styling for invalid feedback */
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 14px;
+}
+
+/* Styling for buttons */
+.btn {
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: red;
+    color: white;
+    border: none;
+}
+
+.btn-secondary {
+    background-color: red;
+    color: white;
+    border: none;
+}
+
+/* Styling for button alignment */
+.text-center {
+    text-align: center;
+}
+</style>
